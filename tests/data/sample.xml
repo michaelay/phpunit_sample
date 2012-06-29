@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<mysqldump xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<database name="sample">
+	<table_data name="users">
+	<row>
+		<field name="id">1</field>
+		<field name="field1">0</field>
+		<field name="field2">0</field>
+		<field name="name">Michael</field>
+		<field name="description">Engineer</field>
+	</row>
+	<row>
+		<field name="id">2</field>
+		<field name="field1">2</field>
+		<field name="field2">3</field>
+		<field name="name">Elliot</field>
+		<field name="description">Engineer at TVB membership</field>
+	</row>
+	<row>
+		<field name="id">3</field>
+		<field name="field1">9</field>
+		<field name="field2">8</field>
+		<field name="name">Vincent</field>
+		<field name="description">The engineer Vincent, not the ohter one with a 5GB ram computer. lol </field>
+	</row>
+	</table_data>
+</database>
+</mysqldump>
