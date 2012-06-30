@@ -37,12 +37,14 @@ class UserTest extends Generic_Tests_DatabaseTestCase
 
     public function testGetFirstFriend() { 
 
-        $stub = $this->getMock('User', array('getFriends')); 
+        $fake_friends = array('aaa', 'bbb', 'ccc');
+
+        $stub = $this->getMock('User', array('getFriends'));
         $stub->expects($this->any())
              ->method('getFriends')
-             ->will($this->returnValueMap(array('aaa', 'bbb')));
+             ->will($this->returnValue($fake_friends));
 
-        $friend = $stub->getFirstFriend(); 
-        $this->assertEquals('friend1', $friend, 'first friend name');
+        $friend = $stub->getFirstFriend();
+        $this->assertEquals('aaa', $friend);
     } 
 } 

@@ -20,11 +20,11 @@ class User {
     } 
 
     public function getFirstFriend() { 
-        $friends = $this->getFriends(); 
+        $friends = $this->getFriends();
         return $friends[0];
     } 
 
-    private function getFriends() { 
+    protected function getFriends() { 
         // some webservice to get friends, will be stub in the test cases
         return array('friend1', 'friend2', 'friend3');
     } 

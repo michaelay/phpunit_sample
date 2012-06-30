@@ -5,5 +5,6 @@
         <var name="DB_USER" value="root" />
         <var name="DB_PASSWD" value="" />
         <var name="DB_DBNAME" value="sample" />
+        <includePath>src</includePath>
     </php>
 </phpunit>

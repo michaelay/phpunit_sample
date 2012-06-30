@@ -1,16 +1,18 @@
 # PHPUnit cheatsheet
+
+Things about PHPUnit that I have found useful.
+
 [Reference](http://www.phpunit.de/manual/current/en/installation.html)
 
 # Installation steps 
-* sudo pear upgrade PEAR
-* pear config-set auto_discover 1
-* pear install pear.phpunit.de/PHPUnit
-* pear install phpunit/DbUnit
-* pear install phpunit/PHPUnit_SkeletonGenerator
+	sudo pear upgrade PEAR
+	sudo pear config-set auto_discover 1
+	sudo pear install pear.phpunit.de/PHPUnit
+	sudo pear install phpunit/DbUnit
+	sudo pear install phpunit/PHPUnit_SkeletonGenerator
 
 # Generate skeleton (optional)
-* `phpunit-skelgen --test -- [class] [class file] [test class] [test class file]`
-* example: 
+`phpunit-skelgen --test -- [class] [class file] [test class] [test class file]`
 
 	phpunit-skelgen --test -- Calculator src/pear/Calculator.class.php  CalculatorTest test/CalculatorTest.php
 
@@ -87,9 +89,9 @@ suggested structure:
 * tests/pear/xxx
 
 
-`phpunit --configuration tests/phpunit.xml --include-path src/ tests/`
+`phpunit tests`
 	
-	$ phpunit --configuration tests/phpunit.xml --include-path src/ tests/ 
+	$ phpunit tests
 	PHPUnit 3.6.10 by Sebastian Bergmann.
 	
 	Configuration read from /Users/mistralay/Documents/sample/test/tests/phpunit.xml
@@ -188,6 +190,43 @@ A Test that users the db assertion (tests/pear/UserTest.php)
 	}
 
 
+# Stub and Mock
+
+Replacing methods of class. It does not work on final, protected and private methods.
+
+User class again: 
+
+	<?php 
+	
+	class User {
+
+		// … 	
+	
+	    public function getFirstFriend() {
+	        $friends = $this->getFriends();
+	        return $friends[0];
+	    }
+	
+	    public function getFriends() {
+	        // some webservice to get friends, will be stub in the test cases
+	        return array('friend1', 'friend2', 'friend3');
+	    }
+
+Test case: 
+
+    public function testGetFirstFriend() {
+
+        $fake_friends = array('aaa', 'bbb', 'ccc');
+
+        $stub = $this->getMock('User', array('getFriends'));
+        $stub->expects($this->any())
+             ->method('getFriends')
+             ->will($this->returnValue($fake_friends));
+
+        $friend = $stub->getFirstFriend();
+        $this->assertEquals('aaa', $friend);
+    }
+    
 # Good practice 
 * data provider 
 
